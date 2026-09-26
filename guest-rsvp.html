@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Invited — Jeremy's Call to the Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --oxford:#172333;
+    --gold:#D4AF37;
+    --parchment:#E8E1D6;
+    --parchment-deep:#DAD0BC;
+    --parchment-light:#F0EBE0;
+    --charcoal:#2B2B2E;
+    --charcoal-dim:#5F594E;
+    --line:#D8CDB8;
+    --rose:#B98572;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--parchment-deep);
+    color:var(--charcoal);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:32px 16px 64px;
+  }
+  .brief{
+    width:100%;
+    max-width:600px;
+    background:var(--parchment);
+    border-radius:22px;
+    border:1px solid rgba(23,35,51,0.06);
+    box-shadow:0 2px 8px rgba(23,35,51,0.10), 0 20px 50px rgba(23,35,51,0.16);
+    padding:0 30px 36px;
+    overflow:hidden;
+  }
+  .masthead{
+    background:var(--oxford);
+    color:var(--gold);
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:13px;
+    letter-spacing:.2px;
+    padding:18px 28px 14px;
+    margin:0 -30px 6px;
+    text-align:center;
+  }
+  .flourish{
+    text-align:center;
+    color:var(--rose);
+    font-size:15px;
+    letter-spacing:.4px;
+    margin:0 0 26px;
+    opacity:.75;
+  }
+  .footer-band{
+    background:var(--oxford);
+    color:var(--gold);
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:12.5px;
+    text-align:center;
+    padding:16px 28px;
+    margin:32px -30px -36px;
+  }
+  .brief-body{padding-top:8px;}
+  .kicker{
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:14px;
+    color:#A9822B;
+    margin:0 0 6px;
+  }
+  h1{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:32px;
+    line-height:1.2;
+    margin:0 0 16px;
+    color:var(--oxford);
+    letter-spacing:.1px;
+  }
+  h2{
+    font-family:'Newsreader',serif;
+    font-weight:500;
+    font-size:20px;
+    line-height:1.3;
+    margin:0 0 10px;
+    color:var(--oxford);
+  }
+  p.lead{
+    font-size:15.5px;
+    line-height:1.75;
+    color:var(--charcoal-dim);
+    margin:0 0 20px;
+  }
+  .detail-card{
+    background:var(--parchment-light);
+    border-radius:16px;
+    padding:20px 22px;
+    margin-bottom:28px;
+  }
+  .detail-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:8px 0;
+    border-bottom:1px solid var(--line);
+    gap:16px;
+  }
+  .detail-row:last-child{border-bottom:none;}
+  .detail-label{
+    font-size:12.5px;
+    color:var(--charcoal-dim);
+    letter-spacing:.3px;
+    text-transform:uppercase;
+    flex-shrink:0;
+  }
+  .detail-value{
+    font-family:'Newsreader',serif;
+    font-size:16px;
+    color:var(--oxford);
+    text-align:right;
+  }
+  .detail-value a{color:var(--oxford);}
+
+  label.field-label{
+    display:block;
+    font-size:13px;
+    color:var(--charcoal-dim);
+    margin-bottom:8px;
+    font-weight:500;
+  }
+  .field{margin-bottom:22px;}
+  input[type=text], input[type=email], textarea, select{
+    width:100%;
+    background:var(--parchment);
+    border:1px solid var(--line);
+    color:var(--charcoal);
+    padding:13px 16px;
+    font-family:'Newsreader',serif;
+    font-size:16px;
+    border-radius:12px;
+    appearance:none;
+  }
+  textarea{resize:vertical;min-height:80px;font-family:'Inter',sans-serif;font-size:14.5px;}
+  select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23172333' stroke-width='2' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 16px center;
+    padding-right:40px;
+  }
+  input:focus, textarea:focus, select:focus{outline:none;border-color:var(--rose);}
+  input::placeholder, textarea::placeholder{color:#9C9384;font-style:italic;}
+
+  .attend-toggle{display:flex;gap:10px;}
+  .attend-option{
+    flex:1;
+    border:1px solid var(--line);
+    background:var(--parchment-light);
+    padding:16px 14px;
+    border-radius:14px;
+    cursor:pointer;
+    text-align:center;
+    transition:border-color .2s ease, background .2s ease, transform .15s ease;
+  }
+  .attend-option:hover{border-color:var(--rose);transform:translateY(-1px);}
+  .attend-option.selected{border-color:var(--oxford);background:var(--oxford);}
+  .attend-option .opt-title{
+    font-family:'Newsreader',serif;
+    font-size:17px;
+    color:var(--oxford);
+  }
+  .attend-option.selected .opt-title{color:var(--parchment);}
+
+  .conditional{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .conditional.open{max-height:900px;}
+
+  .btn{
+    font-family:'Inter',sans-serif;
+    font-size:14px;font-weight:500;
+    padding:13px 26px;
+    border-radius:24px;
+    cursor:pointer;
+    border:1px solid transparent;
+    display:inline-block;
+    text-decoration:none;
+    transition:all .18s ease;
+    width:100%;
+    text-align:center;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:var(--oxford);
+    border-color:var(--gold);
+    font-weight:600;
+  }
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-primary:not(:disabled):hover{background:var(--oxford);color:var(--gold);border-color:var(--oxford);}
+
+  .deadline-note{
+    text-align:center;
+    font-family:'Newsreader',serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--charcoal-dim);
+    margin-top:18px;
+  }
+
+  .signoff{
+    font-family:'Parisienne',cursive;
+    font-size:24px;
+    color:var(--oxford);
+    margin:24px 0 0;
+    line-height:1;
+    text-align:center;
+  }
+
+  .error-msg{
+    color:#B23A3A;
+    font-size:13px;
+    margin-top:-14px;
+    margin-bottom:20px;
+    display:none;
+  }
+  .error-msg.show{display:block;}
+
+  .thankyou-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--oxford);
+    color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;
+    margin:0 auto 20px;
+  }
+  .center{text-align:center;}
+</style>
+</head>
+<body>
+
+<div class="brief">
+  <div class="masthead">Jeremy's Call to the Bar</div>
+  <div class="flourish">&mdash; &middot; &mdash;</div>
+  <div id="app" class="brief-body"></div>
+  <div class="footer-band">we can't wait to celebrate with you</div>
+</div>
+
+<script>
+// ---- CONFIGURE THIS ----
+// Replace with your real Formspree endpoint, e.g. 'https://formspree.io/f/abcdwxyz'
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xkjgqkva';
+// -------------------------
+
+const EVENT = {
+  title: "Jeremy's Call to the Bar",
+  venue: 'Raw Else',
+  venueNote: 'Else Hotel, 145 Jalan Tun H.S. Lee, Chinatown, Kuala Lumpur',
+  date: 'Friday, 11 December',
+  time: '7:00 PM',
+  rsvpBy: '1 December'
+};
+
+let state = {
+  name: '',
+  attending: null, // 'yes' | 'no'
+  dietary: '',
+  drink: '',
+  message: ''
+};
+
+let submitted = false;
+let submitting = false;
+let submitError = false;
+
+function render(){
+  const app = document.getElementById('app');
+  if(submitted){
+    app.innerHTML = renderThankYou();
+  } else {
+    app.innerHTML = renderForm();
+  }
+  attachHandlers();
+}
+
+function renderForm(){
+  return `
+    <p class="kicker">Dear you,</p>
+    <h1>Jeremy got called to the Malaysian Bar!</h1>
+    <p class="lead">He would be really happy to have you with us celebrating this big day. Join us for dinner and drinks &mdash; good food, good company, and a proper toast to how far he's come.</p>
+
+    <div class="detail-card">
+      <div class="detail-row">
+        <span class="detail-label">Venue</span>
+        <span class="detail-value">${EVENT.venue}<br><span style="font-family:'Inter',sans-serif;font-size:12.5px;color:var(--charcoal-dim);">${EVENT.venueNote}</span></span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">The celebration</span>
+        <span class="detail-value">${EVENT.date}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Time</span>
+        <span class="detail-value">${EVENT.time}</span>
+      </div>
+    </div>
+
+    <h2>Will you be joining us?</h2>
+    <div class="field">
+      <div class="attend-toggle">
+        <div class="attend-option ${state.attending==='yes'?'selected':''}" data-attend="yes">
+          <div class="opt-title">Joyfully, yes</div>
+        </div>
+        <div class="attend-option ${state.attending==='no'?'selected':''}" data-attend="no">
+          <div class="opt-title">Can't make it</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-label" for="nameInput">Your name</label>
+      <input type="text" id="nameInput" placeholder="Full name" value="${escapeAttr(state.name)}">
+      <div class="error-msg" id="nameError">Please let us know who's RSVPing.</div>
+    </div>
+
+    <div class="conditional ${state.attending==='yes'?'open':''}" id="attendingFields">
+      <div class="field">
+        <label class="field-label" for="dietaryInput">Any dietary restrictions or allergies?</label>
+        <input type="text" id="dietaryInput" placeholder="e.g. no seafood, nut allergy, vegetarian &mdash; or leave blank" value="${escapeAttr(state.dietary)}">
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="drinkSelect">What are you drinking?</label>
+        <select id="drinkSelect">
+          <option value="" ${state.drink===''?'selected':''}>Select one</option>
+          <option value="Cocktails / Negroni person" ${state.drink==='Cocktails / Negroni person'?'selected':''}>Cocktails &mdash; count me in for a Negroni</option>
+          <option value="Wine" ${state.drink==='Wine'?'selected':''}>Wine</option>
+          <option value="Beer" ${state.drink==='Beer'?'selected':''}>Beer</option>
+          <option value="Non-alcoholic" ${state.drink==='Non-alcoholic'?'selected':''}>Non-alcoholic</option>
+          <option value="Surprise me" ${state.drink==='Surprise me'?'selected':''}>Surprise me</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="messageInput">A note for Jeremy? (optional)</label>
+        <textarea id="messageInput" placeholder="Anything you'd like to say ahead of the big night">${escapeHtml(state.message)}</textarea>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="submitBtn" ${submitting?'disabled':''}>${submitting?'Sending...':'Send my RSVP'}</button>
+    ${submitError ? `<div class="error-msg show" style="text-align:center;margin-top:14px;">Something went wrong sending that &mdash; please try again in a moment.</div>` : ''}
+    <p class="deadline-note">Kindly RSVP by ${EVENT.rsvpBy}</p>
+  `;
+}
+
+function renderThankYou(){
+  const yesMsg = state.attending === 'yes';
+  return `
+    <div class="thankyou-icon">&#10003;</div>
+    <h1 class="center">${yesMsg ? "You're on the list" : "Thank you for letting us know"}</h1>
+    <p class="lead center">${yesMsg
+      ? `We can't wait to see you at ${EVENT.venue} on ${EVENT.date} at ${EVENT.time}. Jeremy is going to be so happy you're there.`
+      : `You'll be missed on the night, but we know you'll be cheering Jeremy on all the same.`}</p>
+    <p class="signoff">see you soon</p>
+  `;
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+function escapeAttr(str){
+  return (str || '').replace(/"/g, '&quot;');
+}
+
+function attachHandlers(){
+  if(submitted) return;
+
+  document.querySelectorAll('.attend-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      state.attending = opt.getAttribute('data-attend');
+      render();
+    });
+  });
+
+  const nameInput = document.getElementById('nameInput');
+  if(nameInput) nameInput.addEventListener('input', e => { state.name = e.target.value; });
+
+  const dietaryInput = document.getElementById('dietaryInput');
+  if(dietaryInput) dietaryInput.addEventListener('input', e => { state.dietary = e.target.value; });
+
+  const drinkSelect = document.getElementById('drinkSelect');
+  if(drinkSelect) drinkSelect.addEventListener('change', e => { state.drink = e.target.value; });
+
+  const messageInput = document.getElementById('messageInput');
+  if(messageInput) messageInput.addEventListener('input', e => { state.message = e.target.value; });
+
+  const submitBtn = document.getElementById('submitBtn');
+  if(submitBtn) submitBtn.addEventListener('click', handleSubmit);
+}
+
+async function handleSubmit(){
+  const nameError = document.getElementById('nameError');
+  if(!state.name.trim() || !state.attending){
+    if(nameError) nameError.classList.add('show');
+    if(!state.attending){
+      document.querySelectorAll('.attend-option').forEach(o => o.style.borderColor = '#B23A3A');
+    }
+    return;
+  }
+  if(nameError) nameError.classList.remove('show');
+
+  submitting = true;
+  submitError = false;
+  render();
+
+  const payload = {
+    name: state.name,
+    attending: state.attending === 'yes' ? 'Yes, attending' : 'Not attending',
+    dietary: state.dietary,
+    drink_preference: state.drink,
+    message: state.message,
+    event: EVENT.title
+  };
+
+  try{
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if(res.ok){
+      submitting = false;
+      submitted = true;
+      render();
+    } else {
+      submitting = false;
+      submitError = true;
+      render();
+    }
+  } catch(err){
+    submitting = false;
+    submitError = true;
+    render();
+  }
+}
+
+render();
+</script>
+</body>
+</html>
